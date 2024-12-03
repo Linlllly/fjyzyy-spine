@@ -1,53 +1,86 @@
 <template>
   <!-- <div>实训前测</div> -->
   <div>
-    <div class="type1" v-if="type === 1">
-      <div class="topic">题目：(文字)</div>
+    <div :class="getClass(nowSubject.id)">
+      <div class="topic">题目：</div>
       <div class="topic-des">
-        根据国际脊柱侧弯研究学会（SRS Scoliosis Research
-        Society）认为放射线片的Cobb角大于等于____________定义为脊柱侧弯。
+        {{ nowSubject.des }}
       </div>
-      <el-radio-group v-model="radio" size="medium" @change="showCorret = true">
-        <el-radio :label="1">备选项</el-radio>
-        <el-radio :label="2">备选项</el-radio>
-        <el-radio :label="3">备选项</el-radio>
-        <el-radio :label="4">备选项</el-radio>
-      </el-radio-group>
-    </div>
-    <div class="type2" v-if="type === 2">
-      <div class="topic">题目：(图片)</div>
-      <div class="topic-des">以下哪张图片为上交叉综合征？</div>
       <el-radio-group
-        v-model="radio2"
+        v-if="nowSubject.type === 'img'"
+        v-model="nowSubject.select"
         size="medium"
-        @change="showCorret2 = true"
+        @change="showCorret = true"
       >
         <div class="item">
-          <div class="box"></div>
-          <el-radio :label="1"> 备选项 </el-radio>
+          <img class="box" src="../../assets/上交叉/上交叉选项1.png" alt="" />
+          <el-radio :label="0"> A </el-radio>
         </div>
         <div class="item">
-          <div class="box"></div>
-          <el-radio :label="2"> 备选项 </el-radio>
+          <img class="box" src="../../assets/上交叉/上交叉选项2.png" alt="" />
+          <el-radio :label="1"> B </el-radio>
         </div>
         <div class="item">
-          <div class="box"></div>
-          <el-radio :label="3"> 备选项 </el-radio>
+          <img class="box" src="../../assets/上交叉/上交叉选项3.png" alt="" />
+          <el-radio :label="2"> C </el-radio>
         </div>
         <div class="item">
-          <div class="box"></div>
-          <el-radio :label="4"> 备选项 </el-radio>
+          <img class="box" src="../../assets/上交叉/上交叉选项4.png" alt="" />
+          <el-radio :label="3"> D </el-radio>
         </div>
       </el-radio-group>
+      <el-radio-group
+        v-if="nowSubject.type === 'text'"
+        v-model="nowSubject.select"
+        size="medium"
+        @change="showCorret = true"
+      >
+        <el-radio
+          v-for="(i, index) in nowSubject.options"
+          :key="index"
+          :label="index"
+          >{{ getOptions(index) }}.{{ i }}</el-radio
+        >
+      </el-radio-group>
+      <div
+        v-if="nowSubject.type === 'line'"
+        style="display: flex; justify-content: center"
+      >
+        <!-- <img class="line" src="../../assets/脊柱侧弯/cobb.png" alt="" /> -->
+        <div
+          class="image-canvas-container"
+          @mousemove="onMouseMove"
+          @mouseup="onMouseUp"
+          @mousedown="onMouseDown"
+        >
+          <!-- 图片元素 -->
+          <img
+            src="../../assets/脊柱侧弯/cobb.png"
+            alt="image"
+            class="line"
+            ref="imageElement"
+          />
+
+          <!-- Canvas绘图 -->
+          <canvas
+            ref="canvas"
+            class="canvas"
+            :width="canvasWidth"
+            :height="canvasHeight"
+          ></canvas>
+        </div>
+      </div>
     </div>
-    <div class="type3" v-if="type === 3">
-      <div class="topic">题目：(画线题)</div>
-      <div class="topic-des">没有示例 暂缓</div>
+
+    <div v-if="showCorret" class="correct">
+      正确答案：{{ getOptions(nowSubject.correct) }}
     </div>
-    <!-- --------------- -->
-    <div v-if="showCorret" class="correct">正确答案：A</div>
-    <div v-if="showCorret2" class="correct">正确答案：A</div>
-    <div class="ok" @click="nextOne">下一题</div>
+    <div class="ok">
+      <!-- <div v-if="nowLook !== 1" @click="changeSub(-1)">上一题</div> -->
+      <div v-if="nowLook < subJectList.length" @click="changeSub(1)">
+        下一题
+      </div>
+    </div>
   </div>
 </template>
 
@@ -55,16 +88,119 @@
 export default {
   data() {
     return {
-      radio: '',
       showCorret: false,
-      radio2: '',
-      showCorret2: false,
-      type: 1
+      nowLook: 1,
+      subJectList: [
+        {
+          id: 1,
+          type: 'img',
+          des: '以下哪张图片为上交叉综合征？',
+          options: [
+            '../../assets/上交叉/上交叉选项1.png',
+            '../../assets/上交叉/上交叉选项2.png',
+            '../../assets/上交叉/上交叉选项3.png',
+            '../../assets/上交叉/上交叉选项4.png'
+          ],
+          correct: 2,
+          select: null
+        },
+        {
+          id: 2,
+          type: 'text',
+          des: '根据NASM-CES美国国家运动医学学会纠正性训练指南，上交叉综合征的特点是：',
+          options: [
+            '一种姿势异常综合征，特征为头部前伸、方肩和肌肉失衡',
+            '一种姿势异常综合征，特征为头部前伸、圆肩和上肢肌肉失衡',
+            '一种姿势变形综合征，特征为头部前伸、圆肩和上肢肌肉失衡',
+            '一种姿势变形综合征，特征为头部前伸、方肩和肌肉失衡'
+          ],
+          correct: 0,
+          select: null
+        },
+        {
+          id: 3,
+          type: 'line',
+          des: '计算下图Cobb值'
+        }
+      ],
+      drawing: false, // 是否正在绘制
+      startX: 0, // 起始X坐标
+      startY: 0, // 起始Y坐标
+      canvasWidth: 500, // canvas 宽度（与图片相同）
+      canvasHeight: 500 // canvas 高度（与图片相同）
+    }
+  },
+  computed: {
+    nowSubject() {
+      return this.subJectList[this.nowLook - 1]
+    },
+    getClass() {
+      return (id) => {
+        return 'type' + id
+      }
+    },
+    getOptions() {
+      return (id) => {
+        if (id === 0) {
+          return 'A'
+        } else if (id === 1) {
+          return 'B'
+        } else if (id === 2) {
+          return 'C'
+        } else if (id === 3) {
+          return 'D'
+        }
+      }
     }
   },
   methods: {
-    nextOne() {
-      this.type += 1
+    changeSub(data) {
+      this.nowLook += data
+      this.showCorret = false
+    },
+    // 鼠标按下时，开始绘制
+    onMouseDown(event) {
+      const rect = this.$refs.canvas.getBoundingClientRect()
+      this.startX = event.clientX - rect.left
+      this.startY = event.clientY - rect.top
+      this.drawing = true
+    },
+
+    // 鼠标移动时，绘制线条
+    onMouseMove(event) {
+      if (this.drawing) {
+        const rect = this.$refs.canvas.getBoundingClientRect()
+        const currentX = event.clientX - rect.left
+        const currentY = event.clientY - rect.top
+        this.drawLine(this.startX, this.startY, currentX, currentY)
+        this.startX = currentX
+        this.startY = currentY
+      }
+    },
+
+    // 鼠标松开时，停止绘制
+    onMouseUp() {
+      this.drawing = false
+    },
+
+    // 绘制线条的函数
+    drawLine(x1, y1, x2, y2) {
+      const canvas = this.$refs.canvas
+      const ctx = canvas.getContext('2d')
+      ctx.strokeStyle = '#FF0000' // 设置线条颜色
+      ctx.lineWidth = 2 // 设置线条宽度
+      ctx.beginPath()
+      ctx.moveTo(x1, y1)
+      ctx.lineTo(x2, y2)
+      ctx.stroke()
+    }
+  },
+  mounted() {
+    // 获取图片的尺寸，并调整canvas尺寸
+    const imageElement = this.$refs.imageElement
+    imageElement.onload = () => {
+      this.canvasWidth = imageElement.width
+      this.canvasHeight = imageElement.height
     }
   }
 }
@@ -75,7 +211,7 @@ export default {
 .topic-des {
   font-size: 24px;
 }
-.type1 {
+.type2 {
   ::v-deep .el-radio-group {
     display: flex;
     flex-direction: column;
@@ -88,7 +224,7 @@ export default {
     }
   }
 }
-.type2 {
+.type1 {
   ::v-deep .el-radio-group {
     padding-top: 30px;
     display: flex;
@@ -127,15 +263,36 @@ export default {
   cursor: pointer;
 }
 .ok {
-  width: 160px;
-  height: 60px;
-  margin: 40px auto 0;
-  color: #fff;
-  background-color: #118f91;
-  border-radius: 10px;
-  font-size: 24px;
-  text-align: center;
-  line-height: 60px;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
   cursor: pointer;
+  div {
+    width: 160px;
+    height: 60px;
+    color: #fff;
+    background-color: #118f91;
+    border-radius: 10px;
+    font-size: 24px;
+    text-align: center;
+    line-height: 60px;
+    margin: 0 10px;
+  }
+}
+.line {
+  width: 500px;
+  height: 500px;
+}
+
+.image-canvas-container {
+  position: relative;
+  display: inline-block;
+}
+
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: crosshair;
 }
 </style>

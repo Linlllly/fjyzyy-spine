@@ -1,6 +1,11 @@
 <template>
+  <!-- <div>实训内容-理想姿势</div> -->
   <div class="main">
-    <video class="canvasContainer" src=""></video>
+    <video
+      class="canvasContainer"
+      src="../../assets/脊柱侧弯/视频1.mp4"
+      controls
+    ></video>
 
     <div class="box_10 flex-col justify-between">
       <div class="text-wrapper_6 flex-col type1">
@@ -13,16 +18,15 @@
           size="medium"
           @change="showCorret = true"
         >
-          <el-radio :label="1">备选项</el-radio>
-          <el-radio :label="2">备选项</el-radio>
-          <el-radio :label="3">备选项</el-radio>
-          <el-radio :label="4">备选项</el-radio>
+          <el-radio :label="1">A.胸椎C型</el-radio>
+          <el-radio :label="2">B.腰椎倒C型</el-radio>
+          <el-radio :label="3">C.腰椎C型弯</el-radio>
+          <el-radio :label="4">D.胸椎倒C型</el-radio>
         </el-radio-group>
-        <div v-if="showCorret" class="correct">正确答案：A</div>
+        <div v-if="showCorret" class="correct">正确答案：CD</div>
       </div>
     </div>
   </div>
-  <!-- <div>实训内容-理想姿势</div> -->
 </template>
 
 <script>
@@ -48,7 +52,7 @@ export default {
 .canvasContainer {
   width: 480px;
   height: 320px;
-  background-color: pink;
+  // background-color: pink;
 }
 
 .box_10 {

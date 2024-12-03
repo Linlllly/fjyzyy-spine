@@ -1,6 +1,6 @@
 <template>
+  <!-- <div>导航</div> -->
   <div class="container">
-    <!-- <div class="colors"></div> -->
     <div class="content">
       <div class="sider">
         <div
@@ -12,7 +12,7 @@
           {{ item }}
         </div>
       </div>
-      <div class="box">
+      <div class="box" v-if="selectedIndex === 0">
         <div class="system" @click="goTraining(1)">
           <div class="img-b"></div>
           <div>上交叉</div>
@@ -32,6 +32,9 @@
           <div class="img-b"></div>
           <div>下肢</div>
         </div>
+      </div>
+      <div v-else class="box">
+        <div class="more">请填写病历</div>
       </div>
     </div>
   </div>
@@ -115,5 +118,9 @@ export default {
       background-size: cover;
     }
   }
+}
+.more {
+  margin: 20px auto;
+  font-size: 24px;
 }
 </style>

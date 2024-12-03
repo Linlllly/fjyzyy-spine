@@ -1,13 +1,16 @@
 <template>
+  <!-- <div>实训内容-理想姿势</div> -->
   <div class="main">
-    <div class="canvasContainer" ref="canvasContainer"></div>
+    <!-- <div class="canvasContainer" ref="canvasContainer"></div> -->
+    <img class="canvasContainer2" src="../../assets/脊柱侧弯/静态.png" alt="" />
     <div class="box_10 flex-col justify-between">
       <div class="text-wrapper_6 flex-col">
-        <strong>理想姿势说明：</strong>xxxxxxxxxxx
+        <strong
+          >理想姿势说明：耳垂、肩峰、股骨大转子、膝盖前1/3、外踝稍前</strong
+        >
       </div>
     </div>
   </div>
-  <!-- <div>实训内容-理想姿势</div> -->
 </template>
 
 <script>
@@ -122,6 +125,10 @@ export default {
 }
 .canvasContainer {
   width: 480px;
+  height: 700px;
+}
+.canvasContainer {
+  width: 400px;
   height: 700px;
 }
 

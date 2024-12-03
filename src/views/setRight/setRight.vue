@@ -7,20 +7,38 @@
     </div>
     <el-radio-group v-model="radio2" size="medium" @change="showCorret2 = true">
       <div class="item">
-        <div class="box"></div>
-        <el-radio :label="1"> 备选项 </el-radio>
+        <!-- <div class="box"></div> -->
+        <video
+          class="box"
+          src="http://www.baidu.com/link?url=xqk_ml__IUX8rrL3HsDDL4Zdh1R9Ai5nrAHCgv7EAUwZx67CNPXrT4dWHV3Ps6O6cSJ2M4ZLvQRswFtiCb56S2kPh1dGOfxy2yfqf2JAwHm"
+          controls
+        ></video>
+
+        <el-radio :label="1"> A.训练腹肌力量 </el-radio>
       </div>
       <div class="item">
-        <div class="box"></div>
-        <el-radio :label="2"> 备选项 </el-radio>
+        <video
+          class="box"
+          src="http://www.baidu.com/link?url=xqk_ml__IUX8rrL3HsDDL4Zdh1R9Ai5nrAHCgv7EAUwZx67CNPXrT4dWHV3Ps6O6cSJ2M4ZLvQRswFtiCb56S2kPh1dGOfxy2yfqf2JAwHm"
+          controls
+        ></video>
+        <el-radio :label="2"> B.牵伸右侧腰方肌 </el-radio>
       </div>
       <div class="item">
-        <div class="box"></div>
-        <el-radio :label="3"> 备选项 </el-radio>
+        <video
+          class="box"
+          src="http://www.baidu.com/link?url=xqk_ml__IUX8rrL3HsDDL4Zdh1R9Ai5nrAHCgv7EAUwZx67CNPXrT4dWHV3Ps6O6cSJ2M4ZLvQRswFtiCb56S2kPh1dGOfxy2yfqf2JAwHm"
+          controls
+        ></video>
+        <el-radio :label="3"> C.训练猫式呼吸 </el-radio>
       </div>
       <div class="item">
-        <div class="box"></div>
-        <el-radio :label="4"> 备选项 </el-radio>
+        <video
+          class="box"
+          src="http://www.baidu.com/link?url=xqk_ml__IUX8rrL3HsDDL4Zdh1R9Ai5nrAHCgv7EAUwZx67CNPXrT4dWHV3Ps6O6cSJ2M4ZLvQRswFtiCb56S2kPh1dGOfxy2yfqf2JAwHm"
+          controls
+        ></video>
+        <el-radio :label="4"> D.牵伸左侧前锯肌 </el-radio>
       </div>
     </el-radio-group>
 

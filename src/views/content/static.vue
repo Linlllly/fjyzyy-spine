@@ -1,6 +1,25 @@
 <template>
+  <!-- <div>实训内容-静态评估</div> -->
   <div class="main">
-    <div class="canvasContainer" ref="canvasContainer"></div>
+    <!-- <div class="canvasContainer" ref="canvasContainer"></div> -->
+    <img
+      class="canvasContainer2"
+      v-if="selectedOption === 1"
+      src="../../assets/脊柱侧弯/正面.png"
+      alt=""
+    />
+    <img
+      class="canvasContainer2"
+      v-if="selectedOption === 2"
+      src="../../assets/脊柱侧弯/侧面.png"
+      alt=""
+    />
+    <img
+      class="canvasContainer2"
+      v-if="selectedOption === 3"
+      src="../../assets/脊柱侧弯/背面.png"
+      alt=""
+    />
     <div class="box_10 flex-col justify-between">
       <div class="look-title">
         <div
@@ -32,7 +51,6 @@
       </div>
     </div>
   </div>
-  <!-- <div>实训内容-静态评估</div> -->
 </template>
 
 <script>
@@ -149,7 +167,10 @@ export default {
   width: 480px;
   height: 700px;
 }
-
+.canvasContainer2 {
+  width: 380px;
+  height: 700px;
+}
 .box_10 {
   flex: 1;
   margin-left: 20px;

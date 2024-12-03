@@ -3,7 +3,7 @@
     <!-- <div>病例呈现</div> -->
     <div class="box">
       <div class="left-img">
-        <!-- <img src="" alt="" /> -->
+        <img src="../../assets/上交叉/上交叉.png" alt="" />
       </div>
       <div class="right-content">
         <div><strong>基本信息：</strong>明明，男，23岁。</div>
