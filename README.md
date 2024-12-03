@@ -1,4 +1,4 @@
-# virtual-3d
+# 中医药大学虚拟矫正库
 
 ## Project setup
 ```
