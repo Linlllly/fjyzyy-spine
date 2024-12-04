@@ -93,117 +93,124 @@ export default {
       subJectList: [
         {
           id: 1,
-          type: 'img',
-          des: '以下哪张图片为上交叉综合征？',
+          type: "img",
+          des: "以下哪张图片为上交叉综合征？",
           options: [
-            '../../assets/上交叉/上交叉选项1.png',
-            '../../assets/上交叉/上交叉选项2.png',
-            '../../assets/上交叉/上交叉选项3.png',
-            '../../assets/上交叉/上交叉选项4.png'
+            "../../assets/上交叉/上交叉选项1.png",
+            "../../assets/上交叉/上交叉选项2.png",
+            "../../assets/上交叉/上交叉选项3.png",
+            "../../assets/上交叉/上交叉选项4.png",
           ],
           correct: 2,
-          select: null
+          select: null,
         },
         {
           id: 2,
-          type: 'text',
-          des: '根据NASM-CES美国国家运动医学学会纠正性训练指南，上交叉综合征的特点是：',
+          type: "text",
+          des: "根据NASM-CES美国国家运动医学学会纠正性训练指南，上交叉综合征的特点是：",
           options: [
-            '一种姿势异常综合征，特征为头部前伸、方肩和肌肉失衡',
-            '一种姿势异常综合征，特征为头部前伸、圆肩和上肢肌肉失衡',
-            '一种姿势变形综合征，特征为头部前伸、圆肩和上肢肌肉失衡',
-            '一种姿势变形综合征，特征为头部前伸、方肩和肌肉失衡'
+            "一种姿势异常综合征，特征为头部前伸、方肩和肌肉失衡",
+            "一种姿势异常综合征，特征为头部前伸、圆肩和上肢肌肉失衡",
+            "一种姿势变形综合征，特征为头部前伸、圆肩和上肢肌肉失衡",
+            "一种姿势变形综合征，特征为头部前伸、方肩和肌肉失衡",
           ],
           correct: 0,
-          select: null
+          select: null,
         },
         {
           id: 3,
-          type: 'line',
-          des: '计算下图Cobb值'
-        }
+          type: "line",
+          des: "计算下图Cobb值",
+        },
       ],
       drawing: false, // 是否正在绘制
       startX: 0, // 起始X坐标
       startY: 0, // 起始Y坐标
       canvasWidth: 500, // canvas 宽度（与图片相同）
-      canvasHeight: 500 // canvas 高度（与图片相同）
-    }
+      canvasHeight: 500, // canvas 高度（与图片相同）
+    };
   },
   computed: {
     nowSubject() {
-      return this.subJectList[this.nowLook - 1]
+      return this.subJectList[this.nowLook - 1];
     },
     getClass() {
       return (id) => {
-        return 'type' + id
-      }
+        return "type" + id;
+      };
     },
     getOptions() {
       return (id) => {
         if (id === 0) {
-          return 'A'
+          return "A";
         } else if (id === 1) {
-          return 'B'
+          return "B";
         } else if (id === 2) {
-          return 'C'
+          return "C";
         } else if (id === 3) {
-          return 'D'
+          return "D";
         }
-      }
-    }
+      };
+    },
   },
   methods: {
     changeSub(data) {
-      this.nowLook += data
-      this.showCorret = false
+      this.nowLook += data;
+      this.showCorret = false;
     },
     // 鼠标按下时，开始绘制
     onMouseDown(event) {
-      const rect = this.$refs.canvas.getBoundingClientRect()
-      this.startX = event.clientX - rect.left
-      this.startY = event.clientY - rect.top
-      this.drawing = true
+      const rect = this.$refs.canvas.getBoundingClientRect();
+      this.startX = event.clientX - rect.left;
+      this.startY = event.clientY - rect.top;
+      this.drawing = true;
     },
 
     // 鼠标移动时，绘制线条
     onMouseMove(event) {
       if (this.drawing) {
-        const rect = this.$refs.canvas.getBoundingClientRect()
-        const currentX = event.clientX - rect.left
-        const currentY = event.clientY - rect.top
-        this.drawLine(this.startX, this.startY, currentX, currentY)
-        this.startX = currentX
-        this.startY = currentY
+        const rect = this.$refs.canvas.getBoundingClientRect();
+        const currentX = event.clientX - rect.left;
+        const currentY = event.clientY - rect.top;
+        this.drawLine(this.startX, this.startY, currentX, currentY);
+        this.startX = currentX;
+        this.startY = currentY;
       }
     },
 
     // 鼠标松开时，停止绘制
     onMouseUp() {
-      this.drawing = false
+      this.drawing = false;
     },
 
     // 绘制线条的函数
     drawLine(x1, y1, x2, y2) {
-      const canvas = this.$refs.canvas
-      const ctx = canvas.getContext('2d')
-      ctx.strokeStyle = '#FF0000' // 设置线条颜色
-      ctx.lineWidth = 2 // 设置线条宽度
-      ctx.beginPath()
-      ctx.moveTo(x1, y1)
-      ctx.lineTo(x2, y2)
-      ctx.stroke()
-    }
+      const canvas = this.$refs.canvas;
+      const ctx = canvas.getContext("2d");
+      ctx.strokeStyle = "#FF0000"; // 设置线条颜色
+      ctx.lineWidth = 2; // 设置线条宽度
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+    },
   },
   mounted() {
     // 获取图片的尺寸，并调整canvas尺寸
-    const imageElement = this.$refs.imageElement
-    imageElement.onload = () => {
-      this.canvasWidth = imageElement.width
-      this.canvasHeight = imageElement.height
+    const imageElement = this.$refs.imageElement;
+    if (imageElement) {
+      if (imageElement.complete) {
+        this.canvasWidth = imageElement.width;
+        this.canvasHeight = imageElement.height;
+      } else {
+        imageElement.onload = () => {
+          this.canvasWidth = imageElement.width;
+          this.canvasHeight = imageElement.height;
+        };
+      }
     }
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>

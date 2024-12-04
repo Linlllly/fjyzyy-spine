@@ -1,22 +1,16 @@
 <template>
   <div>
     <!-- <div>病例呈现</div> -->
-    <div class="box">
+    <div class="presentation">
       <div class="left-img">
-        <img src="../../assets/上交叉/上交叉.png" alt="" />
+        <img :src="caseData.img" alt="" />
       </div>
       <div class="right-content">
-        <div><strong>基本信息：</strong>明明，男，23岁。</div>
-        <div><strong>诊断：</strong>上交叉综合征</div>
-        <div>
-          <strong>评估：</strong
-          >耳垂超过肩峰一指的距离；在自然放松状态下，找到肩胛骨内侧缘与脊柱之间能够放进5指；在自然放松状态下，低头找到颈椎上凸起的一块骨头和第七胸椎棘突之间放一块夹板，角度在18°；在自然放松的状态下，将一根直杆放在骶骨上方，贴在胸椎脊柱上，杆往后倾斜的。
-        </div>
-        <div><strong>兴趣爱好：</strong>喜欢玩电脑游戏。</div>
-        <div>
-          <strong>诉求：</strong
-          >明明上班的时候老是觉得肩膀和脖子酸痛，很影响工作，希望可以缓解疼痛。
-        </div>
+        <div><strong>基本信息：</strong>{{ caseData.info }}</div>
+        <div><strong>诊断：</strong>{{ caseData.persent }}</div>
+        <div><strong>评估：</strong>{{ caseData.assessment }}</div>
+        <div><strong>兴趣爱好：</strong>{{ caseData.like }}</div>
+        <div><strong>诉求：</strong>{{ caseData.need }}</div>
       </div>
     </div>
   </div>
@@ -26,13 +20,19 @@
 // 其他需要的 Three.js 依赖
 
 export default {
-  name: 'show3D',
+  name: "casePresentation",
+  props: {
+    caseData: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
-    return {}
+    return {};
   },
   mounted() {},
-  methods: {}
-}
+  methods: {},
+};
 </script>
 
 <style lang="scss" scoped>
@@ -40,7 +40,7 @@ img {
   width: 100%;
   height: 100%;
 }
-.box {
+.presentation {
   display: flex;
   align-items: center;
   .left-img {

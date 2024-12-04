@@ -22,7 +22,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 // 其他需要的 Three.js 依赖
 
 export default {
-  name: "show3D",
+  name: "idealPosture",
   data() {
     return {
       scene: null,
@@ -33,9 +33,9 @@ export default {
     };
   },
   mounted() {
-    this.initThree();
-    this.loadModel();
-    this.animate();
+    // this.initThree();
+    // this.loadModel();
+    // this.animate();
   },
   methods: {
     //-------导入外部obj

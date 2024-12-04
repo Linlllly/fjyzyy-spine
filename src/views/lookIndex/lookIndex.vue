@@ -1,5 +1,5 @@
 <template>
-  <!-- <div>导航</div> -->
+  <!-- <div>导航页</div> -->
   <div class="container">
     <div class="content">
       <div class="sider">
@@ -12,35 +12,17 @@
           {{ item }}
         </div>
       </div>
+
       <div class="box" v-if="selectedIndex === 0">
-        <div class="system" @click="goTraining(1)">
-          <div class="img-b">
-            <img src="../../assets/testlogo.png" alt="" />
-          </div>
-          <div>上交叉</div>
-        </div>
-
-        <div class="system" @click="goTraining(2)">
-          <div class="img-b">
-            <img src="../../assets/testlogo.png" alt="" />
-          </div>
-          <div>下交叉</div>
-        </div>
-
-        <div class="system" @click="goTraining(3)">
-          <div class="img-b">
-            <img src="../../assets/testlogo.png" alt="" />
-          </div>
-          <div>脊柱侧弯</div>
-        </div>
-
-        <div class="system" @click="goTraining(4)">
-          <div class="img-b">
-            <img src="../../assets/testlogo.png" alt="" />
-          </div>
-          <div>下肢</div>
-        </div>
+        <SystemItem
+          v-for="(training, index) in trainingItems"
+          :key="index"
+          :label="training.label"
+          :imageSrc="training.imageSrc"
+          @click.native="goTraining(training.id)"
+        />
       </div>
+
       <div v-else class="box">
         <div class="more">请填写病历</div>
       </div>
@@ -49,19 +31,34 @@
 </template>
 
 <script>
+import SystemItem from "../../component/SystemItem/index.vue";
+
 export default {
   name: "lookIndex",
-
+  components: {
+    SystemItem,
+  },
   data() {
     return {
       menuItems: ["实训系统", "病例"],
       selectedIndex: 0,
+      trainingItems: [
+        { id: 1, label: "上交叉", imageSrc: require("@/assets/testlogo.png") },
+        { id: 2, label: "下交叉", imageSrc: require("@/assets/testlogo.png") },
+        {
+          id: 3,
+          label: "脊柱侧弯",
+          imageSrc: require("@/assets/testlogo.png"),
+        },
+        { id: 4, label: "下肢", imageSrc: require("@/assets/testlogo.png") },
+      ],
     };
   },
   methods: {
     goTraining(index) {
-      this.$store.dispatch("setTrainingIndex", index);
-      this.$router.push({ path: "/training" });
+      // this.$store.dispatch("setTrainingIndex", index);
+      // this.$router.push({ path: "/training" });
+      this.$router.push({ path: `/main/${index}` });
     },
     selectItem(index) {
       this.selectedIndex = index;
@@ -111,28 +108,6 @@ export default {
   height: 864px;
   background: #e7f6f6;
   justify-content: space-around;
-  .system {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    align-items: center;
-    font-size: 24px;
-    .img-b {
-      width: 220px;
-      height: 220px;
-      background-image: url("../../../public/static/normal/bg.png");
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      img {
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-        padding: 15px;
-        border-radius: 50%;
-      }
-    }
-  }
 }
 .more {
   margin: 20px auto;

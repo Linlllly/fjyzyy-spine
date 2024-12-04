@@ -1,38 +1,59 @@
 <template>
   <!-- <div>互助诊疗</div> -->
   <div class="section_1 flex-col">
-    <div class="system">
-      <div class="img-b"><img src="../../assets/testlogo.png" alt="" /></div>
-      <div>个案基本病史</div>
-    </div>
-
-    <div class="system">
-      <div class="img-b"><img src="../../assets/testlogo.png" alt="" /></div>
-      <div>问诊</div>
-    </div>
-
-    <div class="system">
-      <div class="img-b"><img src="../../assets/testlogo.png" alt="" /></div>
-      <div>体态静态评估</div>
-    </div>
-
-    <div class="system">
-      <div class="img-b"><img src="../../assets/testlogo.png" alt="" /></div>
-      <div>体态动态评估</div>
-    </div>
-    <div class="system">
-      <div class="img-b"><img src="../../assets/testlogo.png" alt="" /></div>
-      <div>治疗方法</div>
-    </div>
-    <div class="system">
-      <div class="img-b"><img src="../../assets/testlogo.png" alt="" /></div>
-      <div>设计运动处方</div>
-    </div>
+    <SystemItem
+      v-for="(training, index) in trainingItems"
+      :key="index"
+      :label="training.label"
+      :imageSrc="training.imageSrc"
+      @click.native="doSome(training.id)"
+    />
   </div>
 </template>
 
 <script>
-export default {};
+import SystemItem from "../../component/SystemItem/index.vue";
+export default {
+  name: "mutualAid",
+  components: {
+    SystemItem,
+  },
+  data() {
+    return {
+      trainingItems: [
+        {
+          id: 1,
+          label: "个案基本病史",
+          imageSrc: require("@/assets/testlogo.png"),
+        },
+        { id: 2, label: "问诊", imageSrc: require("@/assets/testlogo.png") },
+        {
+          id: 3,
+          label: "体态静态评估",
+          imageSrc: require("@/assets/testlogo.png"),
+        },
+        {
+          id: 4,
+          label: "体态动态评估",
+          imageSrc: require("@/assets/testlogo.png"),
+        },
+        {
+          id: 5,
+          label: "治疗方法",
+          imageSrc: require("@/assets/testlogo.png"),
+        },
+        {
+          id: 6,
+          label: "设计运动处方",
+          imageSrc: require("@/assets/testlogo.png"),
+        },
+      ],
+    };
+  },
+  methods: {
+    doSome(index) {},
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -56,7 +77,7 @@ export default {};
     .img-b {
       width: 220px;
       height: 220px;
-      background-image: url("../../../public/static/normal/bg.png");
+      background-image: url("../../assets/bg.png");
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;

@@ -16,16 +16,16 @@
 
 <script>
 export default {
-  name: 'home',
+  name: "home",
   data() {
-    return {}
+    return {};
   },
   methods: {
     goLookIndex() {
-      this.$router.push('/lookIndex')
-    }
-  }
-}
+      this.$router.push("/lookIndex");
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -33,7 +33,8 @@ export default {
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-image: url('../../../public/static/normal/home.png');
+
+  background-image: url("../../assets/home.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
