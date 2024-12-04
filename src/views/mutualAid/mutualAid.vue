@@ -2,37 +2,37 @@
   <!-- <div>互助诊疗</div> -->
   <div class="section_1 flex-col">
     <div class="system">
-      <div class="img-b"></div>
+      <div class="img-b"><img src="../../assets/testlogo.png" alt="" /></div>
       <div>个案基本病史</div>
     </div>
 
     <div class="system">
-      <div class="img-b"></div>
+      <div class="img-b"><img src="../../assets/testlogo.png" alt="" /></div>
       <div>问诊</div>
     </div>
 
     <div class="system">
-      <div class="img-b"></div>
+      <div class="img-b"><img src="../../assets/testlogo.png" alt="" /></div>
       <div>体态静态评估</div>
     </div>
 
     <div class="system">
-      <div class="img-b"></div>
+      <div class="img-b"><img src="../../assets/testlogo.png" alt="" /></div>
       <div>体态动态评估</div>
     </div>
     <div class="system">
-      <div class="img-b"></div>
+      <div class="img-b"><img src="../../assets/testlogo.png" alt="" /></div>
       <div>治疗方法</div>
     </div>
     <div class="system">
-      <div class="img-b"></div>
+      <div class="img-b"><img src="../../assets/testlogo.png" alt="" /></div>
       <div>设计运动处方</div>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {};
 </script>
 
 <style lang="scss" scoped>
@@ -56,10 +56,17 @@ export default {}
     .img-b {
       width: 220px;
       height: 220px;
-      background-image: url('../../../public/static/normal/bg.png');
+      background-image: url("../../../public/static/normal/bg.png");
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
+      img {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        padding: 15px;
+        border-radius: 50%;
+      }
     }
   }
 }

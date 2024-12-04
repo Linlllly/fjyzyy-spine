@@ -54,72 +54,72 @@
 </template>
 
 <script>
-import * as THREE from 'three'
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import * as THREE from "three";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
+import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 // 其他需要的 Three.js 依赖
 
 export default {
-  name: 'show3D',
+  name: "show3D",
   data() {
     return {
       scene: null,
       camera: null,
       renderer: null,
       controls: null,
-      selectedOption: 1
-    }
+      selectedOption: 1,
+    };
   },
   mounted() {
-    this.initThree()
-    this.loadModel()
-    this.animate()
+    this.initThree();
+    this.loadModel();
+    this.animate();
   },
   methods: {
     //-------导入外部obj
     initThree() {
       //创建场景
-      this.scene = new THREE.Scene()
+      this.scene = new THREE.Scene();
       //环境光 无方向
-      const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4)
-      this.scene.add(ambientLight)
+      const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
+      this.scene.add(ambientLight);
       //创建坐标轴辅助器(红x绿y蓝z 选择y轴朝上是约定俗称)
-      var axesHelper = new THREE.AxesHelper(15)
-      this.scene.add(axesHelper)
+      var axesHelper = new THREE.AxesHelper(15);
+      this.scene.add(axesHelper);
       //创建摄像机(视角：较小-望远镜，较大-区域广、视图宽高比(宽/长)、相机可见最近、相机可见最远)
-      this.camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000)
+      this.camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
       // 设置摄像机的位置
-      this.camera.position.z = 5
+      this.camera.position.z = 5;
       //创建渲染器
-      this.renderer = new THREE.WebGLRenderer({ antialias: true })
+      this.renderer = new THREE.WebGLRenderer({ antialias: true });
       //挂节点
-      this.renderer.setSize(480, 700)
-      this.renderer.setClearColor('#e7d185', 1)
-      this.$refs.canvasContainer.appendChild(this.renderer.domElement)
+      this.renderer.setSize(480, 700);
+      this.renderer.setClearColor("#e7d185", 1);
+      this.$refs.canvasContainer.appendChild(this.renderer.domElement);
       //创建控制器
-      this.controls = new OrbitControls(this.camera, this.renderer.domElement)
-      this.controls.enableDamping = true // 启用阻尼效果，使动画更平滑
-      this.controls.dampingFactor = 0.1 // 阻尼系数，调整阻尼的强度
-      this.controls.update() // 更新控制器的尺寸
+      this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+      this.controls.enableDamping = true; // 启用阻尼效果，使动画更平滑
+      this.controls.dampingFactor = 0.1; // 阻尼系数，调整阻尼的强度
+      this.controls.update(); // 更新控制器的尺寸
     },
     loadModel() {
-      let that = this
-      const objLoader = new OBJLoader()
-      const mtlLoader = new MTLLoader()
-      mtlLoader.load('/static/3d/rose.mtl', (materials) => {
-        console.log('加载材质')
-        materials.preload()
-        objLoader.setMaterials(materials)
+      let that = this;
+      const objLoader = new OBJLoader();
+      const mtlLoader = new MTLLoader();
+      mtlLoader.load("/static/3d/rose.mtl", (materials) => {
+        console.log("加载材质");
+        materials.preload();
+        objLoader.setMaterials(materials);
         objLoader.load(
-          '/static/3d/rose.obj',
+          "/static/3d/rose.obj",
           //加载完成
           function (obj) {
-            console.log('加载模型')
-            obj.position.set(0, 0, 0) //设置模型位置
-            obj.scale.set(0.03, 0.03, 0.03) //缩放大小比
-            that.scene.add(obj)
+            console.log("加载模型");
+            obj.position.set(0, 0, 0); //设置模型位置
+            obj.scale.set(0.03, 0.03, 0.03); //缩放大小比
+            that.scene.add(obj);
           },
           //进度条
           function (xhr) {
@@ -127,13 +127,13 @@ export default {
           },
           //报错
           function (error) {
-            console.log(error)
+            console.log(error);
           }
-        )
-      })
+        );
+      });
     },
     animate() {
-      requestAnimationFrame(this.animate)
+      requestAnimationFrame(this.animate);
       // 在每一帧中更新动画或交互逻辑
       // 在更新场景之前更新控制器
       // this.controls.update()
@@ -150,13 +150,13 @@ export default {
       this.camera.lookAt(this.scene.position) //将相机的视线朝向场景的中心点
        */
 
-      this.renderer.render(this.scene, this.camera)
+      this.renderer.render(this.scene, this.camera);
     },
     selectOption(option) {
-      this.selectedOption = option
-    }
-  }
-}
+      this.selectedOption = option;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -168,8 +168,8 @@ export default {
   height: 700px;
 }
 .canvasContainer2 {
-  width: 380px;
-  height: 700px;
+  width: 300px;
+  height: 650px;
 }
 .box_10 {
   flex: 1;
