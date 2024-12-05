@@ -1,8 +1,8 @@
 <template>
   <!-- <div>实训内容-静态评估</div> -->
   <div class="main">
-    <!-- <div class="canvasContainer" ref="canvasContainer"></div> -->
-    <img
+    <div class="canvasContainer" ref="canvasContainer"></div>
+    <!-- <img
       class="canvasContainer2"
       v-if="selectedOption === 1"
       src="../../assets/脊柱侧弯/正面.png"
@@ -19,7 +19,7 @@
       v-if="selectedOption === 3"
       src="../../assets/脊柱侧弯/背面.png"
       alt=""
-    />
+    /> -->
     <div class="box_10 flex-col justify-between">
       <div class="look-title">
         <div
@@ -56,6 +56,7 @@
 <script>
 import * as THREE from "three";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
@@ -107,30 +108,77 @@ export default {
     loadModel() {
       let that = this;
       const objLoader = new OBJLoader();
-      const mtlLoader = new MTLLoader();
-      mtlLoader.load("/static/3d/rose.mtl", (materials) => {
-        console.log("加载材质");
-        materials.preload();
-        objLoader.setMaterials(materials);
-        objLoader.load(
-          "/static/3d/rose.obj",
-          //加载完成
-          function (obj) {
-            console.log("加载模型");
-            obj.position.set(0, 0, 0); //设置模型位置
-            obj.scale.set(0.03, 0.03, 0.03); //缩放大小比
-            that.scene.add(obj);
-          },
-          //进度条
-          function (xhr) {
-            // console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-          },
-          //报错
-          function (error) {
-            console.log(error);
-          }
-        );
-      });
+      const fbxLoader = new FBXLoader();
+      // const mtlLoader = new MTLLoader();
+      // mtlLoader.load("/static/3d/rose.mtl", (materials) => {
+      //   console.log("加载材质");
+      //   materials.preload();
+      //   objLoader.setMaterials(materials);
+      //   objLoader.load(
+      //     "/static/3d/rose.obj",
+      //     //加载完成
+      //     function (obj) {
+      //       console.log("加载模型");
+      //       obj.position.set(0, 0, 0); //设置模型位置
+      //       obj.scale.set(0.03, 0.03, 0.03); //缩放大小比
+      //       that.scene.add(obj);
+      //     },
+      //     //进度条
+      //     function (xhr) {
+      //       // console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+      //     },
+      //     //报错
+      //     function (error) {
+      //       console.log(error);
+      //     }
+      //   );
+      // });
+
+      // objLoader.load(
+      //   "/static/3d/rose.obj",
+      //   //加载完成
+      //   function (obj) {
+      //     console.log("加载模型");
+      //     obj.position.set(0, 0, 0); //设置模型位置
+      //     obj.scale.set(0.03, 0.03, 0.03); //缩放大小比
+      //     that.scene.add(obj);
+      //   },
+      //   //进度条
+      //   function (xhr) {
+      //     // console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+      //   },
+      //   //报错
+      //   function (error) {
+      //     console.log(error);
+      //   }
+      // );
+
+      // fbxLoader.load(
+      //   "/static/3d/男人体.FBX", // FBX 文件路径
+      //   // 加载完成后的回调函数
+      //   function (object) {
+      //     console.log("FBX 模型加载完成");
+
+      //     // 设置模型位置
+      //     object.position.set(0, 0, 0);
+
+      //     // 设置模型缩放
+      //     object.scale.set(0.03, 0.03, 0.03);
+
+      //     // 添加到场景中
+      //     that.scene.add(object);
+      //   },
+
+      //   // 加载进度回调（可选）
+      //   function (xhr) {
+      //     // console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
+      //   },
+
+      //   // 错误回调（可选）
+      //   function (error) {
+      //     console.error("加载 FBX 模型出错:", error);
+      //   }
+      // );
     },
     animate() {
       requestAnimationFrame(this.animate);
